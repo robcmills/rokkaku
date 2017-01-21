@@ -3,7 +3,7 @@
   "author": "robcmills",
   "version": "0.0.1",
   "scripts": {
-    "start": "nodemon ./server",
+    "start": "npm run build && NODE_ENV=production node compiled/server.js",
     "dev": "NODE_ENV=development nodemon",
     "build:dev": "NODE_ENV=development webpack --debug --colors --display-error-details --config ./webpack/dev-server.config.js"
   },
