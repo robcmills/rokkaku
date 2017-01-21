@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules"
+  ],
+  "verbose": true,
+  "watch": [
+    "server",
+    "webpack/dev-server.config.js"
+  ],
+  "exec": "npm run build:dev && node compiled/server.dev.js"
+}

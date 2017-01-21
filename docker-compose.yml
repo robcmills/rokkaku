@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    build: .
+    container_name: rokkaku_container
+    image: rokkaku_image
+    ports:
+      - "4000:4000"
+    command: npm run dev
+    volumes:
+      - .:/usr/rokkaku
