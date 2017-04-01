@@ -1,0 +1,32 @@
+{
+  "name": "rokkaku",
+  "version": "1.0.0",
+  "description": "Rokkaku",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "next": "^2.0.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robcmills/rokkaku.git"
+  },
+  "author": "robcmills",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robcmills/rokkaku/issues"
+  },
+  "homepage": "https://github.com/robcmills/rokkaku#readme"
+}
