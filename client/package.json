@@ -1,0 +1,20 @@
+{
+  "name": "rokkaku-client",
+  "version": "0.1.0",
+  "description": "Rokkaku Client",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^2.0.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}

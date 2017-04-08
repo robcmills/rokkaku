@@ -1,0 +1,17 @@
+{
+  "name": "rokkaku-server",
+  "version": "0.1.0",
+  "description": "Rokkaku Server",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
