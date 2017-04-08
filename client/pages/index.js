@@ -13,21 +13,21 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SOCKET_DID_MOUNT:
-      return {...state, socket: action.payload}
-    case SOCKET_CONNECT:
-      return {...state, socket: action.payload}
-    default:
-      return state
-  }
+	switch (action.type) {
+		case SOCKET_DID_MOUNT:
+			return {...state, socket: action.payload}
+		case SOCKET_CONNECT:
+			return {...state, socket: action.payload}
+		default:
+			return state
+	}
 }
 
 const middlewares = []
 
 if (process.env.NODE_ENV !== 'production') {
-  const { logger } = require('redux-logger')
-  middlewares.push(logger)
+	const { logger } = require('redux-logger')
+	middlewares.push(logger)
 }
 
 const makeStore = initialState => {
@@ -40,9 +40,9 @@ class IndexPage extends React.Component {
 	componentDidMount() {
 		const {dispatch} = this.props
 		const socket = io(serverUri)
-    dispatch({type: SOCKET_DID_MOUNT, payload: socket})
-    socket.on('connect', () => {
-	    dispatch({type: SOCKET_CONNECT, payload: socket})
+		dispatch({type: SOCKET_DID_MOUNT, payload: socket})
+		socket.on('connect', () => {
+			dispatch({type: SOCKET_CONNECT, payload: socket})
 		})
 	}
 
