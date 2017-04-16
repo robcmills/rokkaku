@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // import { SET_USERNAME } from '../redux/action-types'
-import { checkUsernameAvailable } from '../redux/action-creators'
+import { createUser } from '../redux/action-creators'
 
 const RK_USERNAME = 'RK_USERNAME'
 
 class Username extends React.Component {
 	static propTypes = {
-		checkUsernameAvailable: PropTypes.func,
+		createUser: PropTypes.func,
 		// dispatch: PropTypes.func,
 		// socket: PropTypes.object,
 		username: PropTypes.string,
@@ -37,7 +37,7 @@ class Username extends React.Component {
 
 	getNewUsername = () => {
 		const username = prompt('Please enter a username:')
-		this.props.checkUsernameAvailable(username).then(
+		this.props.createUser(username).then(
 			response => console.log('response', response),
 			error => console.log('error', error)
 		)
@@ -46,7 +46,7 @@ class Username extends React.Component {
 
 const mapStateToProps = ({ socket, username }) => ({ socket, username })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
-	checkUsernameAvailable,
+	createUser,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToActionCreators)(Username)

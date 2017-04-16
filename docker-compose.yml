@@ -1,0 +1,9 @@
+mongo:
+  container_name: rk_mongo
+  image: mongo:3.4
+  ports:
+   - "0.0.0.0:27018:27018/tcp"
+   - "0.0.0.0:28018:28018/tcp"
+  command: mongod --port 27018 --rest --httpinterface --smallfiles
+  volumes:
+    - ~/src/rokkaku/data/db:/data/db

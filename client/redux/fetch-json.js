@@ -35,7 +35,7 @@ export default function fetchJson({
 		fetch(url, options)
 			.then(checkStatus)
 			.then(parseJSON)
-			.then(response => resolve(response))
+			.then(json => resolve(json))
 			.catch(error => reject(error))
 	})
 }
