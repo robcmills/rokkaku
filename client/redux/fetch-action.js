@@ -1,5 +1,3 @@
-import Promise from 'bluebird'
-
 import fetchJson from './fetch-json'
 import { getResolvedActionType, getRejectedActionType } from './utils'
 
@@ -21,14 +19,14 @@ export default function fetchAction({
 						type: getResolvedActionType(type),
 						payload: response,
 					})
-					return Promise.resolve(response)
+					return response
 				},
 				error => {
 					dispatch({
 						type: getRejectedActionType(type),
 						payload: error,
 					})
-					return Promise.reject(error)
+					return error
 				},
 			)
 	}

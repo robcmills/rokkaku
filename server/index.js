@@ -1,10 +1,18 @@
 const mongoose = require('mongoose')
 const app = require('express')()
+const cors = require('cors')
+const bodyparser = require('body-parser')
+const apiRouter = require('./api/router')
 
-const DB_URI = process.env.DB_URI || 'localhost:27018'
+const DB_URI = process.env.DB_URI || 'localhost:27018/rokkaku'
 const PORT = process.env.PORT || 4000
 
 mongoose.connect(DB_URI)
+mongoose.connection.on('error', console.log)
+
+app.use(cors())
+app.use(bodyparser.json())
+app.use('/api', apiRouter)
 
 app.get('/', (req, res) => {
 	res.send('<h1>Hello world, from server</h1>')

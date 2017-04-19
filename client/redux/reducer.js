@@ -1,4 +1,10 @@
-import { SET_USERNAME, SOCKET_DID_MOUNT, SOCKET_CONNECT } from './action-types'
+import {
+	CREATE_USER,
+	SET_USERNAME,
+	SOCKET_DID_MOUNT,
+	SOCKET_CONNECT,
+} from './action-types'
+import { getResolvedActionType } from './utils'
 
 const initialState = {
 	socket: null,
@@ -13,6 +19,9 @@ export default (state = initialState, action) => {
 			return { ...state, socket: action.payload }
 		case SET_USERNAME:
 			return { ...state, username: action.payload }
+		case getResolvedActionType(CREATE_USER):
+			console.log('action', action)
+			return { ...state, username: action.payload.username }
 		default:
 			return state
 	}

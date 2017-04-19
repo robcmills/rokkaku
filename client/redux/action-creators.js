@@ -5,5 +5,5 @@ export const createUser = username => fetchAction({
 	data: { username },
 	method: 'POST',
 	type: CREATE_USER,
-	url: '/api/user/create',
+	url: '/api/users/create',
 })

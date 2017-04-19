@@ -1,14 +1,16 @@
-import Promise from 'bluebird'
+import P from 'bluebird'
 import fetch from 'isomorphic-fetch'
 
-function checkStatus(response) {
+const SERVER_URI = 'http://localhost:4000'
+
+const checkStatus = P.coroutine(function* checkStatus(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response
 	}
-	const error = new Error(response.statusText)
+	const error = new Error(yield response.text())
 	error.response = response
 	throw error
-}
+})
 
 function parseJSON(response) {
 	return response.json()
@@ -31,11 +33,11 @@ export default function fetchJson({
 		}
 	}
 
-	return new Promise((resolve, reject) => {
-		fetch(url, options)
+	return new P((resolve, reject) => {
+		fetch(SERVER_URI + url, options)
 			.then(checkStatus)
 			.then(parseJSON)
-			.then(json => resolve(json))
-			.catch(error => reject(error))
+			.then(resolve)
+			.catch(reject)
 	})
 }

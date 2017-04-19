@@ -4,6 +4,9 @@
   "description": "Rokkaku Server",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
     "express": "^4.15.2",
     "mongoose": "^4.9.4",
     "socket.io": "^1.7.3"
