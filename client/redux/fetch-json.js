@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 
 const SERVER_URI = 'http://localhost:4000'
 
-const checkStatus = P.coroutine(function* checkStatus(response) {
+const checkStatus = P.coroutine(function* checkStatusCo(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response
 	}

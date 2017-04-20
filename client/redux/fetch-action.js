@@ -1,3 +1,4 @@
+import P from 'bluebird'
 import fetchJson from './fetch-json'
 import { getResolvedActionType, getRejectedActionType } from './utils'
 
@@ -26,7 +27,7 @@ export default function fetchAction({
 						type: getRejectedActionType(type),
 						payload: error,
 					})
-					return error
+					return P.reject(error)
 				},
 			)
 	}

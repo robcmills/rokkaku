@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { noop } from 'lodash'
 
-// import { SET_USERNAME } from '../redux/action-types'
-import { createUser } from '../redux/action-creators'
+import { createUser, setUsername } from '../redux/action-creators'
 
 const RK_USERNAME = 'RK_USERNAME'
 
 class Username extends React.Component {
 	static propTypes = {
 		createUser: PropTypes.func,
-		// dispatch: PropTypes.func,
 		// socket: PropTypes.object,
+		setUsername: PropTypes.func,
 		username: PropTypes.string,
 	}
 
@@ -24,29 +24,45 @@ class Username extends React.Component {
 	}
 
 	componentDidMount() {
-		// const { dispatch, socket } = this.props
-		let username = this.props.username || localStorage.getItem(RK_USERNAME)
-		if (!username) {
-			username = this.getNewUsername()
-
-			// dispatch({ type: SET_USERNAME, payload: username })
-			// localStorage.setItem(RK_USERNAME, username)
-			// socket.broadcast('')
+		let username = this.props.username
+		if (username) {
+			return
+		}
+		username = localStorage.getItem(RK_USERNAME)
+		if (username) {
+			this.props.setUsername(username)
+			return
+		}
+		username = this.getNewUsername()
+		if (username) {
+			localStorage.setItem(RK_USERNAME, username)
+			// socket.broadcast(username + ' connected')
 		}
 	}
 
-	getNewUsername = () => {
-		const username = prompt('Please enter a username:')
+	getNewUsername = (promptMsg = 'Please enter a username:') => {
+		const username = prompt(promptMsg)
+		if (!username) {
+			return null
+		}
 		this.props.createUser(username).then(
-			response => console.log('response', response),
-			error => console.log('error', error)
+			noop,
+			error => {
+				if (error.response.status === 409) {
+					this.getNewUsername(
+						`"${username}" is not available. Please enter another username:`
+					)
+				}
+			}
 		)
+		return username
 	}
 }
 
 const mapStateToProps = ({ socket, username }) => ({ socket, username })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
 	createUser,
+	setUsername,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToActionCreators)(Username)

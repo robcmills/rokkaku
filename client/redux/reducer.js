@@ -18,9 +18,8 @@ export default (state = initialState, action) => {
 		case SOCKET_CONNECT:
 			return { ...state, socket: action.payload }
 		case SET_USERNAME:
-			return { ...state, username: action.payload }
+			return { ...state, username: action.payload.username }
 		case getResolvedActionType(CREATE_USER):
-			console.log('action', action)
 			return { ...state, username: action.payload.username }
 		default:
 			return state
