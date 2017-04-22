@@ -1,0 +1,4 @@
+export const SET_USERNAME = 'user/SET_USERNAME'
+export const CREATE_USER = 'user/CREATE_USER'
+export const SHOW_USERNAME_MODAL = 'user/SHOW_USERNAME_MODAL'
+export const CLOSE_USERNAME_MODAL = 'user/CLOSE_USERNAME_MODAL'
