@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash'
 
-import { socketDidConnect, socketDidMount } from '../../redux/action-creators'
+import { socketDidConnect, socketDidMount } from './action-creators'
 
 const serverUri = 'http://localhost:4000'
 
 class Socket extends React.Component {
 	static propTypes = {
-		isConnected: PropTypes.string,
+		socket: PropTypes.object,
 		socketDidConnect: PropTypes.func,
 		socketDidMount: PropTypes.func,
 	}
@@ -22,7 +22,7 @@ class Socket extends React.Component {
 				<Head>
 					<script src={`${serverUri}/socket.io/socket.io.js`} />
 				</Head>
-				<div>Socket is connected: {this.props.isConnected}</div>
+				<div>Socket is connected: {get(this.props.socket, 'connected') ? 'true' : 'false'}</div>
 			</div>
 		)
 	}
@@ -37,9 +37,7 @@ class Socket extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ socket }) => ({
-	isConnected: get(socket, 'connected') ? 'true' : 'false',
-})
+const mapStateToProps = ({ socket }) => ({ socket })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
 	socketDidMount,
 	socketDidConnect,

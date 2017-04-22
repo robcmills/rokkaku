@@ -7,7 +7,7 @@ import makeStore from '../redux/store'
 
 import Mui from '../components/mui'
 import Socket from '../components/socket/'
-import Username from '../components/username'
+import User from '../components/user'
 
 const reset = {
 	position: 'absolute',
@@ -34,7 +34,7 @@ class IndexPage extends React.Component {
 				<div style={reset}>
 					<h1>Index Page</h1>
 					<Socket />
-					<Username />
+					<User />
 				</div>
 			</Mui>
 		)
