@@ -1,8 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
 import withRedux from 'next-redux-wrapper'
 import makeStore from '../redux/store'
+
+import Mui from '../components/mui'
 import Socket from '../components/socket/'
 import Username from '../components/username'
 
@@ -15,6 +18,10 @@ const reset = {
 }
 
 class IndexPage extends React.Component {
+	static propTypes = {
+		userAgent: PropTypes.string,
+	}
+
 	static getInitialProps({ req }) {
 		const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
 		const isServer = !!req
@@ -23,11 +30,13 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<div style={reset}>
-				<h1>Index Page</h1>
-				<Socket />
-				<Username />
-			</div>
+			<Mui userAgent={this.props.userAgent}>
+				<div style={reset}>
+					<h1>Index Page</h1>
+					<Socket />
+					<Username />
+				</div>
+			</Mui>
 		)
 	}
 }
