@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { noop } from 'lodash'
 
-import { createUser, setUsername } from '../redux/action-creators'
+import { createUser, setUsername } from '../../redux/action-creators'
 
 const RK_USERNAME = 'RK_USERNAME'
 

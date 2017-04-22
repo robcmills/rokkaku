@@ -6,6 +6,14 @@ import makeStore from '../redux/store'
 import Socket from '../components/socket/'
 import Username from '../components/username'
 
+const indexPageStyle = {
+	position: 'absolute',
+	bottom: 0,
+	left: 0,
+	right: 0,
+	top: 0,
+}
+
 class IndexPage extends React.Component {
 	static propTypes = {
 		dispatch: PropTypes.func,
@@ -13,7 +21,7 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div style={indexPageStyle}>
 				<h1>Index Page</h1>
 				<Socket dispatch={this.props.dispatch} />
 				<Username dispatch={this.props.dispatch} />
