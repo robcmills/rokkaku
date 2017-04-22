@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
 import withRedux from 'next-redux-wrapper'
@@ -6,7 +7,7 @@ import makeStore from '../redux/store'
 import Socket from '../components/socket/'
 import Username from '../components/username'
 
-const indexPageStyle = {
+const reset = {
 	position: 'absolute',
 	bottom: 0,
 	left: 0,
@@ -21,7 +22,7 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<div style={indexPageStyle}>
+			<div style={reset}>
 				<h1>Index Page</h1>
 				<Socket dispatch={this.props.dispatch} />
 				<Username dispatch={this.props.dispatch} />
