@@ -2,16 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { get } from 'lodash'
 
-import bindEvents from './bind-events'
+import { socketDidConnect, socketDidMount } from '../../redux/action-creators'
 
 const serverUri = 'http://localhost:4000'
 
 class Socket extends React.Component {
 	static propTypes = {
-		dispatch: PropTypes.func,
 		isConnected: PropTypes.string,
+		socketDidConnect: PropTypes.func,
+		socketDidMount: PropTypes.func,
 	}
 
 	render() {
@@ -26,14 +28,21 @@ class Socket extends React.Component {
 	}
 
 	componentDidMount() {
-		const { dispatch } = this.props
 		const socket = io(serverUri)  // eslint-disable-line no-undef
-		bindEvents({ dispatch, socket })
+
+		this.props.socketDidMount({ socket })
+		socket.on('connect', () => {
+			this.props.socketDidConnect({ socket })
+		})
 	}
 }
 
 const mapStateToProps = ({ socket }) => ({
 	isConnected: get(socket, 'connected') ? 'true' : 'false',
 })
+const mapDispatchToActionCreators = dispatch => bindActionCreators({
+	socketDidMount,
+	socketDidConnect,
+}, dispatch)
 
-export default connect(mapStateToProps)(Socket)
+export default connect(mapStateToProps, mapDispatchToActionCreators)(Socket)

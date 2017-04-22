@@ -161,34 +161,7 @@
 		"strict": [2, "global"],
 		"use-isnan": 2,
 		"wrap-iife": [2, "any"],
-		"yoda": 2,
-		"react/sort-comp": [2, {
-			"order": [
-				"displayName",
-				"propTypes",
-				"contextTypes",
-				"childContextTypes",
-				"mixins",
-				"getDataBindings",
-				"statics",
-				"defaultProps",
-				"state",
-				"constructor",
-				"getDefaultProps",
-				"getInitialState",
-				"getChildContext",
-				"componentWillMount",
-				"render",
-				"/^render.+$/",
-				"componentDidMount",
-				"componentWillReceiveProps",
-				"shouldComponentUpdate",
-				"componentWillUpdate",
-				"componentDidUpdate",
-				"componentWillUnmount",
-				"/^on.+$/"
-			]
-		}]
+		"yoda": 2
 	},
 	"plugins": [
 		"react"

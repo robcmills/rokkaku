@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
 import withRedux from 'next-redux-wrapper'
@@ -16,16 +15,18 @@ const reset = {
 }
 
 class IndexPage extends React.Component {
-	static propTypes = {
-		dispatch: PropTypes.func,
+	static getInitialProps({ req }) {
+		const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
+		const isServer = !!req
+		return { isServer, userAgent }
 	}
 
 	render() {
 		return (
 			<div style={reset}>
 				<h1>Index Page</h1>
-				<Socket dispatch={this.props.dispatch} />
-				<Username dispatch={this.props.dispatch} />
+				<Socket />
+				<Username />
 			</div>
 		)
 	}
