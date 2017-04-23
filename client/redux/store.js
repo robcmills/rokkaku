@@ -7,9 +7,9 @@ import reducer from './reducer'
 const middlewares = [thunkMiddleware]
 
 if (process.env.NODE_ENV !== 'production') {
-	middlewares.push(logger)
+  middlewares.push(logger)
 }
 
 export default () => {
-	return compose(applyMiddleware(...middlewares))(createStore)(reducer)
+  return compose(applyMiddleware(...middlewares))(createStore)(reducer)
 }
