@@ -5,14 +5,14 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-const UsernameModal = ({ isOpen, onCancel, onSubmit }) => {
+const UsernameModal = ({ errorText, isOpen, onCancel, onChange, onSubmit, username }) => {
 	const actions = [
 		<FlatButton
 			label="Cancel"
 			onTouchTap={onCancel}
 		/>,
 		<FlatButton
-			disabled
+			disabled={!username}
 			label="Submit"
 			onTouchTap={onSubmit}
 			primary
@@ -27,15 +27,23 @@ const UsernameModal = ({ isOpen, onCancel, onSubmit }) => {
 			open={isOpen}
 			title="Please enter a username:"
 		>
-			<TextField fullWidth />
+			<TextField
+				errorText={errorText}
+				fullWidth
+				name="username"
+				onChange={onChange}
+			/>
 		</Dialog>
 	)
 }
 
 UsernameModal.propTypes = {
+	errorText: PropTypes.string,
 	isOpen: PropTypes.bool,
 	onCancel: PropTypes.func,
+	onChange: PropTypes.func,
 	onSubmit: PropTypes.func,
+	username: PropTypes.string,
 }
 
 export default UsernameModal

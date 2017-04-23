@@ -1,3 +1,4 @@
+export const SET_ERROR_TEXT = 'user/SET_ERROR_TEXT'
 export const SET_USERNAME = 'user/SET_USERNAME'
 export const CREATE_USER = 'user/CREATE_USER'
 export const SHOW_USERNAME_MODAL = 'user/SHOW_USERNAME_MODAL'

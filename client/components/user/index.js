@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { noop } from 'lodash'
 
 import {
 	closeUsernameModal,
 	createUser,
+	setErrorText,
 	setUsername,
 	showUsernameModal,
 } from './action-creators'
@@ -19,10 +19,12 @@ class Username extends React.Component {
 	static propTypes = {
 		closeUsernameModal: PropTypes.func,
 		createUser: PropTypes.func,
+		errorText: PropTypes.string,
 		isModalOpen: PropTypes.bool,
 		// socket: PropTypes.object,
-		showUsernameModal: PropTypes.func,
+		setErrorText: PropTypes.func,
 		setUsername: PropTypes.func,
+		showUsernameModal: PropTypes.func,
 		username: PropTypes.string,
 	}
 
@@ -37,40 +39,46 @@ class Username extends React.Component {
 			return
 		}
 		this.props.showUsernameModal()
-		// username = this.getNewUsername()
-		// if (username) {
-		// 	localStorage.setItem(RK_USERNAME, username)
-		// 	// socket.broadcast(username + ' connected')
-		// }
 	}
 
-	getNewUsername = (promptMsg = 'Please enter a username:') => {
-		const username = prompt(promptMsg)
-		if (!username) {
-			return null
-		}
+	handleCancel = () => {
+		this.props.setUsername(null)
+		this.props.closeUsernameModal()
+	}
+
+	handleChange = (event, newValue) => {
+		this.props.setUsername(newValue)
+	}
+
+	handleSubmit = () => {
+		const { username } = this.props
 		this.props.createUser(username).then(
-			noop,
+			() => {
+				this.props.closeUsernameModal()
+				localStorage.setItem(RK_USERNAME, username)
+				// socket.broadcast(username + ' connected')
+			},
 			error => {
 				if (error.response.status === 409) {
-					this.getNewUsername(
-						`"${username}" is not available. Please enter another username:`
+					this.props.setErrorText(
+						`"${username}" is not available. Please enter another username.`
 					)
 				}
 			}
 		)
-		return username
 	}
-
-	handleCloseModal = () => this.props.closeUsernameModal()
 
 	render() {
 		return (
 			<div>
 				Username: {this.props.username}
 				<Modal
+					errorText={this.props.errorText}
 					isOpen={this.props.isModalOpen}
-					onCancel={this.handleCloseModal}
+					onCancel={this.handleCancel}
+					onChange={this.handleChange}
+					onSubmit={this.handleSubmit}
+					username={this.props.username}
 				/>
 			</div>
 		)
@@ -81,6 +89,7 @@ const mapStateToProps = ({ user }) => ({ ...user })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
 	closeUsernameModal,
 	createUser,
+	setErrorText,
 	setUsername,
 	showUsernameModal,
 }, dispatch)
