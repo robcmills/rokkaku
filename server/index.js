@@ -30,9 +30,13 @@ const server = app.listen(PORT, 'localhost', err => {
 const io = require('socket.io')(server)
 
 io.on('connection', socket => {
-  console.log('a user connected')
-  console.log('socket.request.headers.cookie', socket.request.headers.cookie)
-  console.log('socket.conn.remoteAddress', socket.conn.remoteAddress)
+  console.log('new connection')
+  // console.log('socket.request.headers.cookie', socket.request.headers.cookie)
+  // console.log('socket.conn.remoteAddress', socket.conn.remoteAddress)
+
+  socket.on('user connected', username => {
+    console.log('user connected', username)
+  })
 
   socket.on('disconnect', () => {
     console.log('user disconnected')

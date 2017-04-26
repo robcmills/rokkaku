@@ -6,7 +6,6 @@ import withRedux from 'next-redux-wrapper'
 import makeStore from '../redux/store'
 
 import Mui from '../components/mui'
-import Socket from '../components/socket/'
 import User from '../components/user'
 
 const reset = {
@@ -29,11 +28,11 @@ class IndexPage extends React.Component {
   }
 
   render() {
+    const { isServer, userAgent } = this.props
     return (
-      <Mui userAgent={this.props.userAgent}>
+      <Mui userAgent={userAgent}>
         <div style={reset}>
           <h1>Index Page</h1>
-          <Socket />
           <User />
         </div>
       </Mui>

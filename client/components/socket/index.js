@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Head from 'next/head'
+import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash'
@@ -19,25 +19,24 @@ class Socket extends React.Component {
   render() {
     return (
       <div>
-        <Head>
-          <script src={`${serverUri}/socket.io/socket.io.js`} />
-        </Head>
         <div>Socket is connected: {get(this.props.socket, 'connected') ? 'true' : 'false'}</div>
+        {this.props.children}
       </div>
     )
   }
 
   componentDidMount() {
-    const socket = io(serverUri)  // eslint-disable-line no-undef
+    this.socket = io(serverUri)
 
-    this.props.socketDidMount({ socket })
+    this.props.socketDidMount(socket)
     socket.on('connect', () => {
-      this.props.socketDidConnect({ socket })
+      this.props.socketDidConnect(socket)
+      socket.emit('user connected', this.props.username)
     })
   }
 }
 
-const mapStateToProps = ({ socket }) => ({ socket })
+const mapStateToProps = ({ socket, user }) => ({ socket, ...user })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
   socketDidMount,
   socketDidConnect,

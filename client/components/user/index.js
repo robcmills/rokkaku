@@ -11,17 +11,19 @@ import {
   showUsernameModal,
 } from './action-creators'
 
+import socket from '../../modules/socket'
 import Modal from './modal'
 
 const RK_USERNAME = 'RK_USERNAME'
 
-class Username extends React.Component {
+class User extends React.Component {
   static propTypes = {
     closeUsernameModal: PropTypes.func,
     createUser: PropTypes.func,
     errorText: PropTypes.string,
     isModalOpen: PropTypes.bool,
-    // socket: PropTypes.object,
+    isServer: PropTypes.bool,
+    socket: PropTypes.object,
     setErrorText: PropTypes.func,
     setUsername: PropTypes.func,
     showUsernameModal: PropTypes.func,
@@ -31,14 +33,22 @@ class Username extends React.Component {
   componentDidMount() {
     let username = this.props.username
     if (username) {
+      this.emitUserConnected(username)
       return
     }
     username = localStorage.getItem(RK_USERNAME)
     if (username) {
       this.props.setUsername(username)
+      this.emitUserConnected(username)
       return
     }
     this.props.showUsernameModal()
+  }
+
+  emitUserConnected = (username = null) => {
+    if (username) {
+      socket.emit('user connected', username)
+    }
   }
 
   handleCancel = () => {
@@ -56,7 +66,7 @@ class Username extends React.Component {
       () => {
         this.props.closeUsernameModal()
         localStorage.setItem(RK_USERNAME, username)
-        // socket.broadcast(username + ' connected')
+        this.emitUserConnected(username)
       },
       error => {
         if (error.response.status === 409) {
@@ -94,4 +104,4 @@ const mapDispatchToActionCreators = dispatch => bindActionCreators({
   showUsernameModal,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToActionCreators)(Username)
+export default connect(mapStateToProps, mapDispatchToActionCreators)(User)

@@ -5,7 +5,14 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-const UsernameModal = ({ errorText, isOpen, onCancel, onChange, onSubmit, username }) => {
+const UsernameModal = ({
+  errorText,
+  isOpen,
+  onCancel,
+  onChange,
+  onSubmit,
+  username,
+}) => {
   const actions = [
     <FlatButton
       label="Cancel"
