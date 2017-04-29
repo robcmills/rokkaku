@@ -23,7 +23,6 @@ class User extends React.Component {
     errorText: PropTypes.string,
     isModalOpen: PropTypes.bool,
     isServer: PropTypes.bool,
-    socket: PropTypes.object,
     setErrorText: PropTypes.func,
     setUsername: PropTypes.func,
     showUsernameModal: PropTypes.func,
