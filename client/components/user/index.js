@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
 import {
   closeUsernameModal,
@@ -16,6 +17,10 @@ import Modal from './modal'
 import FlatButton from 'material-ui/FlatButton'
 
 const RK_USERNAME = 'RK_USERNAME'
+
+const Username = styled.div`
+  padding: 10px;
+`
 
 class User extends React.Component {
   static propTypes = {
@@ -80,7 +85,7 @@ class User extends React.Component {
 
   render() {
     return (
-      <div>
+      <Username>
         {this.props.username || 'Connect'}
         <Modal
           errorText={this.props.errorText}
@@ -90,7 +95,7 @@ class User extends React.Component {
           onSubmit={this.handleSubmit}
           username={this.props.username}
         />
-      </div>
+      </Username>
     )
   }
 }
