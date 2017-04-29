@@ -13,6 +13,7 @@ import {
 
 import socket from '../../modules/socket'
 import Modal from './modal'
+import FlatButton from 'material-ui/FlatButton'
 
 const RK_USERNAME = 'RK_USERNAME'
 
@@ -80,7 +81,7 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        Username: {this.props.username}
+        {this.props.username || 'Connect'}
         <Modal
           errorText={this.props.errorText}
           isOpen={this.props.isModalOpen}

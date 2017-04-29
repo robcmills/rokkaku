@@ -2,19 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
+import App from '../components/app'
+
 import withRedux from 'next-redux-wrapper'
 import makeStore from '../redux/store'
-
-import Mui from '../components/mui'
-import User from '../components/user'
-
-const reset = {
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  right: 0,
-  top: 0,
-}
 
 class IndexPage extends React.Component {
   static propTypes = {
@@ -30,12 +21,7 @@ class IndexPage extends React.Component {
   render() {
     const { isServer, userAgent } = this.props
     return (
-      <Mui userAgent={userAgent}>
-        <div style={reset}>
-          <h1>Index Page</h1>
-          <User />
-        </div>
-      </Mui>
+      <App isServer={isServer} userAgent={userAgent} />
     )
   }
 }
