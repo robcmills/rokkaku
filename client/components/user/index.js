@@ -19,7 +19,15 @@ import FlatButton from 'material-ui/FlatButton'
 const RK_USERNAME = 'RK_USERNAME'
 
 const Username = styled.div`
+  align-items: center;
+  align-self: stretch;
+  display: flex;
   padding: 10px;
+  &:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
 `
 
 class User extends React.Component {
@@ -65,6 +73,12 @@ class User extends React.Component {
     this.props.setUsername(newValue)
   }
 
+  handleClick = () => {
+    if (!this.props.username) {
+      this.props.showUsernameModal()
+    }
+  }
+
   handleSubmit = () => {
     const { username } = this.props
     this.props.createUser(username).then(
@@ -85,7 +99,7 @@ class User extends React.Component {
 
   render() {
     return (
-      <Username>
+      <Username onClick={this.handleClick}>
         {this.props.username || 'Connect'}
         <Modal
           errorText={this.props.errorText}

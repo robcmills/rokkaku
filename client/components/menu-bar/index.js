@@ -18,7 +18,7 @@ const MenuBar = () => {
   return (
     <Bar>
       <MenuIcon color="white" style={{ padding: '10px' }} />
-      Rokkaku
+      ⬢ Rokkaku
       <User />
     </Bar>
   )
