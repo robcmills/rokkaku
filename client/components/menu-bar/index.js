@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Link from 'next/link'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import FlatButton from 'material-ui/FlatButton'
 import Popover from 'material-ui/Popover'
@@ -48,7 +49,9 @@ const MenuBar = ({ isMenuOpen, toggleMenu }) => {
           onRequestClose={toggleMenu}
         >
           <Menu>
-            <MenuItem primaryText="Refresh" />
+            <Link href="/editor">
+              <a><MenuItem primaryText="Editor" onClick={toggleMenu} /></a>
+            </Link>
             <MenuItem primaryText="Help &amp; feedback" />
             <MenuItem primaryText="Settings" />
             <MenuItem primaryText="Sign out" />

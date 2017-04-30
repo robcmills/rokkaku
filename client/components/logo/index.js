@@ -21,6 +21,7 @@ const Logo = ({ toggleMenu }) => (
     <div>
       <RokkakuSvg />
     </div>
+    <div>(Tap anywhere to begin)</div>
  </Center>
 )
 

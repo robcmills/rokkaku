@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
 import App from '../components/app'
-import Logo from '../components/logo'
+import Editor from '../components/editor'
 
 import withRedux from 'next-redux-wrapper'
 import makeStore from '../redux/store'
 
-class IndexPage extends React.Component {
+class EditorPage extends React.Component {
   static propTypes = {
     isServer: PropTypes.bool,
     userAgent: PropTypes.string,
@@ -24,7 +24,7 @@ class IndexPage extends React.Component {
     const { isServer, userAgent } = this.props
     return (
       <App
-        content={<Logo />}
+        content={<Editor />}
         isServer={isServer}
         userAgent={userAgent}
       />
@@ -32,4 +32,4 @@ class IndexPage extends React.Component {
   }
 }
 
-export default withRedux(makeStore)(IndexPage)
+export default withRedux(makeStore)(EditorPage)
