@@ -1,5 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { toggleMenu } from '../menu-bar/action-creators'
 
 import RokkakuSvg from './rokkaku'
 
@@ -11,8 +15,8 @@ const Center = styled.div`
   justify-content: center;
 `
 
-const Logo = () => (
-	<Center>
+const Logo = ({ toggleMenu }) => (
+	<Center onClick={toggleMenu}>
     <div>⬢ Rokkaku</div>
     <div>
       <RokkakuSvg />
@@ -20,4 +24,12 @@ const Logo = () => (
  </Center>
 )
 
-export default Logo
+Logo.propTypes = {
+	toggleMenu: PropTypes.func,
+}
+
+const mapDispatchToActionCreators = dispatch => bindActionCreators({
+  toggleMenu,
+}, dispatch)
+
+export default connect(null, mapDispatchToActionCreators)(Logo)
