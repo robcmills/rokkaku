@@ -1,8 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import FlatButton from 'material-ui/FlatButton'
+import Popover from 'material-ui/Popover'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
+
+import { toggleMenu } from './action-creators'
 
 import User from '../user'
 
@@ -14,10 +22,39 @@ const Bar = styled.div`
   justify-content: space-between;
 `
 
-const MenuBar = () => {
+const MenuButton = styled.div`
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  padding: 10px;
+  &:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+`
+
+const MenuBar = ({ isMenuOpen, toggleMenu }) => {
+  let anchorEl
   return (
     <Bar>
-      <MenuIcon color="white" style={{ padding: '10px' }} />
+      <MenuButton onClick={toggleMenu} ref={el => { anchorEl = el }}>
+        <MenuIcon style={{ color: 'currentColor' }} />
+        <Popover
+          open={isMenuOpen}
+          anchorEl={anchorEl}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={toggleMenu}
+        >
+          <Menu>
+            <MenuItem primaryText="Refresh" />
+            <MenuItem primaryText="Help &amp; feedback" />
+            <MenuItem primaryText="Settings" />
+            <MenuItem primaryText="Sign out" />
+          </Menu>
+        </Popover>
+      </MenuButton>
       ⬢ Rokkaku
       <User />
     </Bar>
@@ -25,7 +62,12 @@ const MenuBar = () => {
 }
 
 MenuBar.propTypes = {
-  prop: PropTypes.string,
+  toggleMenu: PropTypes.func,
 }
 
-export default MenuBar
+const mapStateToProps = ({ menu }) => ({ ...menu })
+const mapDispatchToActionCreators = dispatch => bindActionCreators({
+  toggleMenu,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToActionCreators)(MenuBar)
