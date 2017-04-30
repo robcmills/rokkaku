@@ -55,7 +55,6 @@ const MenuBar = ({ isMenuOpen, toggleMenu }) => {
           </Menu>
         </Popover>
       </MenuButton>
-      ⬢ Rokkaku
       <User />
     </Bar>
   )

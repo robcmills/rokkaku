@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import 'babel-polyfill'
 
 import App from '../components/app'
+import Logo from '../components/logo'
 
 import withRedux from 'next-redux-wrapper'
 import makeStore from '../redux/store'
@@ -21,7 +22,11 @@ class IndexPage extends React.Component {
   render() {
     const { isServer, userAgent } = this.props
     return (
-      <App isServer={isServer} userAgent={userAgent} />
+      <App
+        content={<Logo />}
+        isServer={isServer}
+        userAgent={userAgent}
+      />
     )
   }
 }
