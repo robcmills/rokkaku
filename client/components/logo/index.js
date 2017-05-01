@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { toggleMenu } from '../menu-bar/action-creators'
+import * as menuActions from '../menu-bar/action-creators'
 
 import RokkakuSvg from './rokkaku'
 
@@ -16,21 +16,21 @@ const Center = styled.div`
 `
 
 const Logo = ({ toggleMenu }) => (
-	<Center onClick={toggleMenu}>
+  <Center onClick={toggleMenu}>
     <div>⬢ Rokkaku</div>
     <div>
       <RokkakuSvg />
     </div>
     <div>(Tap anywhere to begin)</div>
- </Center>
+  </Center>
 )
 
 Logo.propTypes = {
-	toggleMenu: PropTypes.func,
+  toggleMenu: PropTypes.func,
 }
 
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
-  toggleMenu,
+  toggleMenu: menuActions.toggleMenu,
 }, dispatch)
 
 export default connect(null, mapDispatchToActionCreators)(Logo)
