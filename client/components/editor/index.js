@@ -9,6 +9,7 @@ import { withProps } from 'recompose'
 import * as editorActions from './action-creators'
 import * as userActions from '../user/action-creators'
 import Button from '../button'
+import Board from '../board'
 
 const Center = styled.div`
   align-items: center;
@@ -18,30 +19,33 @@ const Center = styled.div`
   justify-content: center;
 `
 
-const Editor = ({ createBoard }) => (
-  <Center>
-    <h2>Editor</h2>
-    <Button onClick={createBoard}>Create New</Button>
-  </Center>
-)
-
-Editor.propTypes = {
-  createBoard: PropTypes.func,
+const Editor = ({ createNewBoard, currentBoard }) => {
+  return currentBoard ?
+    <Board /> :
+    <Center>
+      <h2>Editor</h2>
+      <Button onClick={createNewBoard}>Create New</Button>
+    </Center>
 }
 
-const mapStateToProps = ({ user }) => ({ ...user })
+Editor.propTypes = {
+  createNewBoard: PropTypes.func,
+  currentBoard: PropTypes.object,
+}
+
+const mapStateToProps = ({ editor, user }) => ({ ...editor, ...user })
 const mapDispatchToActionCreators = dispatch => bindActionCreators({
-  createBoard: editorActions.createBoard,
+  createNewBoard: editorActions.createNewBoard,
   showUsernameModal: userActions.showUsernameModal,
 }, dispatch)
 
 export default _.flowRight(
   connect(mapStateToProps, mapDispatchToActionCreators),
-  withProps(({ createBoard, showUsernameModal, username }) => ({
-    createBoard: () => {
-      return username
-        ? createBoard({ username })
-        : showUsernameModal()
+  withProps(({ createNewBoard, showUsernameModal, username }) => ({
+    createNewBoard: () => {
+      return username ?
+        createNewBoard({ username }) :
+        showUsernameModal()
     },
   }))
 )(Editor)

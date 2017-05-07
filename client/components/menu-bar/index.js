@@ -16,6 +16,7 @@ const Bar = styled.div`
   background-color: black;
   color: white;
   display: flex;
+  flex: 0 0 auto;
   justify-content: space-between;
 `
 
