@@ -9,7 +9,7 @@ import { withProps } from 'recompose'
 import * as editorActions from './action-creators'
 import * as userActions from '../user/action-creators'
 import Button from '../button'
-import Board from '../board'
+import EditableBoard from './editable-board'
 
 const Center = styled.div`
   align-items: center;
@@ -21,7 +21,7 @@ const Center = styled.div`
 
 const Editor = ({ createNewBoard, currentBoard }) => {
   return currentBoard ?
-    <Board /> :
+    <EditableBoard board={currentBoard} /> :
     <Center>
       <h2>Editor</h2>
       <Button onClick={createNewBoard}>Create New</Button>

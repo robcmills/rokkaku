@@ -2,7 +2,12 @@ import fetchAction from '../../redux/fetch-action'
 import {
   CREATE_BOARD,
   CREATE_NEW_BOARD,
+  TOGGLE_MENU,
 } from './action-types'
+
+export const toggleMenu = () => ({
+  type: TOGGLE_MENU,
+})
 
 export const createBoard = ({ username }) => fetchAction({
   data: { username },

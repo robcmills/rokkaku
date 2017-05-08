@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
 // import _ from 'lodash'
 
 // import Elements from '../elements'
@@ -12,22 +10,21 @@ import Hexes from './hexes'
 // import ValidMoves from '../validMoves'
 
 const Board = ({
-  currentBoard,
+  board,
 }) => {
   return (
-    <svg viewBox={`0, 0, ${currentBoard.width}, ${currentBoard.height}`}>
+    <svg viewBox={`0, 0, ${board.width}, ${board.height}`}>
       <Hexes
-        hexes={currentBoard.hexes}
-        offsetX={currentBoard.offset}
-        offsetY={currentBoard.offset}
+        hexes={board.hexes}
+        offsetX={board.offsetX}
+        offsetY={board.offsetY}
       />
     </svg>
   )
 }
 
 Board.propTypes = {
-  currentBoard: PropTypes.object,
+  board: PropTypes.object,
 }
 
-const mapStateToProps = ({ editor }) => ({ ...editor })
-export default connect(mapStateToProps)(Board)
+export default Board

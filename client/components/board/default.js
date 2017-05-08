@@ -30,7 +30,8 @@ export default {
   hexes: map(hexTypes, row => (
     map(row, type => ({ type })
   ))),
-  offset: HEX_RADIUS * 2,
+  offsetX: HEX_RADIUS * 2,
+  offsetY: HEX_RADIUS * 2,
   height: HEX_RADIUS * 23,
   width: HEX_RADIUS * 19,
 }
