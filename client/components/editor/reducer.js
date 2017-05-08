@@ -2,6 +2,7 @@ import {
   CREATE_BOARD,
   CREATE_NEW_BOARD,
   TOGGLE_MENU,
+  UPDATE_BOARD,
 } from './action-types'
 import { createReducer, getResolvedActionType } from '../../redux/utils'
 import defaultBoard from '../board/default'
@@ -25,4 +26,12 @@ export default createReducer(initialState, {
     ...state,
     currentBoard: defaultBoard,
   }),
+  [UPDATE_BOARD]: (state, updates) => ({
+    ...state,
+    currentBoard: {
+      ...state.currentBoard,
+      ...updates,
+      isChanged: true,
+    },
+  })
 })

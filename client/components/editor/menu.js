@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 
 import EditIcon from 'material-ui/svg-icons/image/edit'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import EditName from './edit-name'
 
 import * as actions from './action-creators'
 
@@ -21,6 +22,9 @@ const Menu = styled.div`
 `
 
 const MenuItem = styled.div`
+  padding: 10px;
+`
+const MenuItemHover = styled.div`
   padding: 10px;
   &:hover {
     background-color: black;
@@ -45,8 +49,14 @@ const EditMenu = ({ isMenuOpen, toggleMenu }) => (
     {
       isMenuOpen ?
         <Menu>
-          <MenuItem onClick={toggleMenu}>
+          <MenuItemHover
+            onClick={toggleMenu}
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
+          >
             <CloseIcon style={{ color: 'currentColor', display: 'block' }} />
+          </MenuItemHover>
+          <MenuItem>
+            <EditName />
           </MenuItem>
         </Menu> :
         <EditButton onClick={toggleMenu}>

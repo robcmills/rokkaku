@@ -3,6 +3,7 @@ import {
   CREATE_BOARD,
   CREATE_NEW_BOARD,
   TOGGLE_MENU,
+  UPDATE_BOARD,
 } from './action-types'
 
 export const toggleMenu = () => ({
@@ -18,4 +19,9 @@ export const createBoard = ({ username }) => fetchAction({
 
 export const createNewBoard = () => ({
   type: CREATE_NEW_BOARD,
+})
+
+export const updateBoard = updates => ({
+  payload: updates,
+  type: UPDATE_BOARD,
 })
