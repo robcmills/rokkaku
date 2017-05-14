@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { flowRight } from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { reduxForm } from 'redux-form'
 
 import EditIcon from 'material-ui/svg-icons/image/edit'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
@@ -76,4 +78,7 @@ const mapDispatchToActionCreators = dispatch => bindActionCreators({
   toggleMenu: actions.toggleMenu,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToActionCreators)(EditMenu)
+export default flowRight(
+  connect(mapStateToProps, mapDispatchToActionCreators),
+  reduxForm({ form: 'EditMenu' })
+)(EditMenu)

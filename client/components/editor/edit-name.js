@@ -5,14 +5,17 @@ import { withProps } from 'recompose'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { Field } from 'redux-form'
+
 import TextInput from '../inputs/text'
 
 import * as actions from './action-creators'
 
 const EditName = ({ currentBoard, onChange }) => (
-  <TextInput
+  <Field
     label="Name:"
     name="name"
+    component={TextInput}
     onChange={onChange}
     value={currentBoard.name}
   />

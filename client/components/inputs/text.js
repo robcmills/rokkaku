@@ -9,16 +9,16 @@ const Label = styled.label`
   font-size: 12px;
 `
 
-const TextInput = ({ label, name, onChange, value }) => (
+const TextInput = ({ input, label }) => (
   <div>
-    <Label htmlFor={name}>{label}</Label>
-    <Input id={name} type="text" onChange={onChange} value={value} />
+    <Label htmlFor={input.name}>{label}</Label>
+    <Input id={input.name} type="text" {...input} />
   </div>
 )
 
 TextInput.propTypes = {
+  input: PropTypes.object.isRequired,
   label: PropTypes.string,
-  name: PropTypes.string.isRequired,
   onChange: PropTypes.function,
   value: PropTypes.string,
 }
