@@ -9,6 +9,7 @@ import { reduxForm } from 'redux-form'
 import EditIcon from 'material-ui/svg-icons/image/edit'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import EditName from './edit-name'
+import EditHexTypes from './edit-hex-types'
 
 import * as actions from './action-creators'
 
@@ -29,7 +30,7 @@ const MenuItem = styled.div`
 const MenuItemHover = styled.div`
   padding: 10px;
   &:hover {
-    background-color: black;
+    background-color: dimgray;
     color: white;
     cursor: pointer;
   }
@@ -59,6 +60,9 @@ const EditMenu = ({ isMenuOpen, toggleMenu }) => (
           </MenuItemHover>
           <MenuItem>
             <EditName />
+          </MenuItem>
+          <MenuItem>
+            <EditHexTypes />
           </MenuItem>
         </Menu> :
         <EditButton onClick={toggleMenu}>

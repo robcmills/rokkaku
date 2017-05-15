@@ -1,13 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 import Input from './input'
-
-const Label = styled.label`
-  display: block;
-  font-size: 12px;
-`
+import Label from './label'
 
 const TextInput = ({ input, label }) => (
   <div>
@@ -19,8 +14,6 @@ const TextInput = ({ input, label }) => (
 TextInput.propTypes = {
   input: PropTypes.object.isRequired,
   label: PropTypes.string,
-  onChange: PropTypes.function,
-  value: PropTypes.string,
 }
 
 export default TextInput

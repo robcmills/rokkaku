@@ -1,4 +1,4 @@
-import { keys, reverse, slice } from 'lodash'
+import { assign, keys, reverse, slice } from 'lodash'
 
 export const HEX_RADIUS = 20
 export const SHAPE_RADIUS = HEX_RADIUS / 2
@@ -43,7 +43,6 @@ export const elementNames = keys(elementColors)
 
 export const hexColors = {
   empty: colors.Transparent,
-  neutral: colors.Silver,
   neutral1: colors.Silver,
   neutral2: colors.LightGray,
   neutral3: colors.DarkGray,
@@ -61,3 +60,5 @@ export const HEX_CARDINALS_CLOCKWISE = [
 ]
 
 export const HEX_CARDINALS_COUNTER_CLOCKWISE = reverse(slice(HEX_CARDINALS_CLOCKWISE))
+
+export const hexTypes = assign({}, elementColors, hexColors)
