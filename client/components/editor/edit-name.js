@@ -23,7 +23,7 @@ const EditName = ({ currentBoard, onChange }) => (
 
 EditName.propTypes = {
   currentBoard: PropTypes.object,
-  onChange: PropTypes.function,
+  onChange: PropTypes.func,
 }
 
 EditName.defaultProps = {

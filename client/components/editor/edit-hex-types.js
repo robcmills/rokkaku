@@ -13,8 +13,8 @@ const EditHexTypes = ({ selectHexType, selectedHexType }) => (
   <div>
     <Label>Hex Types:</Label>
     {
-      map(hexTypes, (color, type) => (
-        <div>{type},{color}</div>
+      map(hexTypes, (color, index) => (
+        <div key={index}>{color}</div>
       ))
     }
   </div>
