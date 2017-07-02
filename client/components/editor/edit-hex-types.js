@@ -1,33 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { map } from 'lodash'
 
 import Label from '../inputs/label'
+import { MenuItem } from './menu-item'
+import HexType from './hex-type'
 
 import { hexTypes } from '../../modules/constants'
-import * as actions from './action-creators'
 
-const EditHexTypes = ({ selectHexType, selectedHexType }) => (
+const EditHexTypes = () => (
   <div>
-    <Label>Hex Types:</Label>
-    {
-      map(hexTypes, (color, index) => (
-        <div key={index}>{color}</div>
-      ))
-    }
+    <MenuItem>
+      <Label>Hex Types:</Label>
+    </MenuItem>
+    {map(hexTypes, (color, type) =>
+      <HexType color={color} key={type} type={type} />)}
   </div>
 )
 
-EditHexTypes.propTypes = {
-  selectHexType: PropTypes.func,
-  selectedHexType: PropTypes.func,
-}
-
-const mapStateToProps = ({ editor }) => ({ ...editor })
-const mapDispatchToActionCreators = dispatch => bindActionCreators({
-  selectHexType: actions.selectHexType,
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToActionCreators)(EditHexTypes)
+export default EditHexTypes

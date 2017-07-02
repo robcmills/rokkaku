@@ -1,6 +1,7 @@
 import {
   CREATE_BOARD,
   CREATE_NEW_BOARD,
+  SELECT_HEX_TYPE,
   TOGGLE_MENU,
   UPDATE_BOARD,
 } from './action-types'
@@ -11,6 +12,7 @@ const initialState = {
   currentBoard: null,
   boardsById: null,
   isMenuOpen: true,
+  selectedHexType: null,
 }
 
 export default createReducer(initialState, {
@@ -25,6 +27,10 @@ export default createReducer(initialState, {
   [CREATE_NEW_BOARD]: state => ({
     ...state,
     currentBoard: defaultBoard,
+  }),
+  [SELECT_HEX_TYPE]: (state, hexType) => ({
+    ...state,
+    selectedHexType: hexType,
   }),
   [UPDATE_BOARD]: (state, updates) => ({
     ...state,
